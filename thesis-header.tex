@@ -24,11 +24,26 @@
 \microtypecontext{spacing=nonfrench}
 
 \usepackage{latexsym, amsmath, amssymb, amsfonts}
-\usepackage{graphicx, color, xcolor, wrapfig, subcaption}
+\usepackage{graphicx, color, wrapfig, subcaption}
+\usepackage[table]{xcolor}
 
 \usepackage[hyphens]{url}
 \usepackage[breaklinks=true, linkcolor=blue, citecolor=blue, colorlinks=true]{hyperref}
 \newcommand*{\doi}[1]{\href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}}
+
+\usepackage{lineno}
+\usepackage{tikz}
+\usepackage[version=4]{mhchem}
+\usepackage{flowchart}
+
+\definecolor{wongorange}{HTML}{D55E00}
+\usetikzlibrary{shapes, arrows, patterns, calc, fadings, fit}
+\usetikzlibrary{shapes.geometric,positioning, decorations.pathmorphing}
+\tikzstyle{arrow} = [very thick, ->, >=stealth]
+
+
+\newcommand\figureWidthSet{0.5\textwidth}
+\DeclareUnicodeCharacter{1E54}{\'{P}}
 
 \usepackage[backend=biber,
             hyperref=true,
@@ -47,7 +62,7 @@
             articletitle=true,
 ]{biblatex}
 
-\addbibresource{refs.bib}
+\addbibresource{references.bib}
 
 \setcounter{biburlnumpenalty}{1000}  % allow breaks at numbers
 \setcounter{biburlucpenalty}{1000}   % allow breaks at uppercase letters
@@ -78,7 +93,6 @@
 \usepackage[binary-units]{siunitx}
 \sisetup{group-separator={,},
 	detect-all,
-	binary-units,
 	list-units = single,
 	range-units = single,
 	range-phrase = --,
