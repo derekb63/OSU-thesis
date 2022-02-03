@@ -4,9 +4,7 @@
 \renewcommand{\TheAuthors}{Derek Bean, David L. Blunck}
 
 \renewcommand{\TheAddress}{
-\textit{Journal of Awesome Physics} \\
-Vol.~VOLUME, PAGES, YEAR. \\
-\doi{10.1016/xxxx}
+\textbf{Status: In Preparation}
 }
 
 \PaperHeader{\TheTitle}{\TheAuthors}{\TheAddress}
@@ -41,14 +39,13 @@ Vol.~VOLUME, PAGES, YEAR. \\
 
     The probability of flaming ignition for beds of Douglas-fir particles were measured for three different wind speeds and firebrand orientations in a wind tunnel. Douglas-fir particles serve as a surrogate for natural fuels near the WUI. Figure~\ref{fig:windTunnelApparatus} shows a representation of the wind tunnel, fuel bed, and the portion of the device for lowing a cartridge heater (i.e., surrogate firebrand) onto the fuel bed.  The wind speeds tested were 0.5 \si{\meter\per\second}, 3.5 \si{\meter\per\second}, and 5.8 \si{\meter\per\second}. Higher wind speeds were not tested to avoid material from the fuel bed blowing away. The wind speed was measured with a TSI-IFA300 hot wire probe. Tests were conducted with the heater placed parallel, perpendicular, and 45\si{\degree} relative to the wind direction for each wind speed. 
 
-    The cartridge heater had a diameter of 6.4\si{\milli\meter} and was 51\si{\milli\meter} long. The size of the heater was chosen to represent large firebrands with a high potential for igniting fuel beds~\cite{Manzello2007a}. An advantage of using a heater as a surrogate firebrand is that the temperature of the heater was controlled (using a PID controller implemented in LabVIEW). Heater temperatures, ranging from 250\si{\celsius} to 750\si{\celsius}, were measured using a type-K thermocouple. The thermocouple was affixed to the longitudinal center of the heater and the circumferential opposite of the fuel bed.  The heater was lowered onto the fuel bed and the pressure between the heater and the fuel bed controlled with an automated lowering device equipped with a load cell. The pressure of the heater on the fuel bed was set to be equivalent to that of a 10\si{\gram} firebrand. The heater was affixed to 4-40 threaded rods that extend 100\si{\milli\meter} below the load cell and lowering apparatus. This arrangement was used to minimize flow disruptions caused by fixtures. 
     
     The fuel beds were created in a multi-step process. Kiln dried Douglas-fir lumber was planed, then granulated, and finally screened such that the particles fit through a 2.3\si{\milli\meter} screen but not a 1.3\si{\milli\meter} screen. The fuel was placed in a 140\si{\milli\meter} diameter glass container with a depth of 70\si{\milli\meter} before insertion into the wind tunnel. The average bulk density of the fuel beds was 74.2\si{\kilo\gram\per\cubic\meter}.   
     
     A minimum of 20 ignition tests were conducted for each experimental condition with a total of 241 tests.  The temperature set points of the heater for the various experiments were identified using the three-phase optimal design procedure~\cite{Wu2014, Burke2017TestPractice}. The three-phase optimal design is a sequential procedure used to ascertain the probability of a binary outcome (i.e., ignition or non-ignition) with a limited number of tests. The logistic regressions and 95\% confidence intervals of the ignition probability were calculated using the scikit-learn python package~\cite{scikit-learn}. A fuel bed was considered to ignite if a flame was observed and persisted after the heater was removed. If flaming ignition was not observed after 3000\si{\second} of heater contact the heater was removed and the test was considered to have a no-ignition outcome.
      \begin{figure}[hbpt]
             \centering
-            \resizebox{\columnwidth}{!}{%
+            \resizebox{0.5\columnwidth}{!}{%
                 \begin{tikzpicture}
                     \filldraw[pattern=north west lines, pattern color=brown, thick] (2.84, 0)  rectangle (4.34, -.75) node[pos=0.5,rectangle,fill=white] {\scriptsize Fuel Bed};
                     \fill [draw=white,  inner color=red, outer color=white ] (3.59, 0.01) circle (0.15);
@@ -86,7 +83,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
     The ignition or no ignition outcomes of the the tests are shown in Figure~\ref{fig:heaterAngle}. Individual markers in the plots represent the outcome of each test. The curves are logistic regressions for each of the test groups (i.e., tests with the same wind speed and heater angle) with shaded regions around the curves indicating the 95\% confidence interval of the regressions. The tests are grouped such that each plot shows tests of different wind speeds at the same heater orientation. The topmost plot shows results when the heater is parallel to the flow, the middle plot when the heater is 45\si{\degree} to the flow, and the bottom plot when the heater is perpendicular to the flow. 
         \begin{figure}[hpbt]
             \centering
-            \includegraphics[width=\columnwidth]{Figures/heat_angle_hist_names.png}
+            \includegraphics[width=0.5\columnwidth]{Figures/heat_angle_hist_names.png}
             \caption{Ignition or no ignition outcomes of tests at different bulk wind speeds with respect to heater orientation. Markers indicate the outcome of each test and the curves show the logistic regression of each test group. The shaded regions show 95\% confidence intervals for each regression.}
             \label{fig:heaterAngle}
         \end{figure}
@@ -119,7 +116,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
     
         \begin{figure}[hpbt]
             \centering
-            \includegraphics[width=\columnwidth]{Figures/stacked_wind_speed.png}
+            \includegraphics[width=0.5\columnwidth]{Figures/stacked_wind_speed.png}
             \caption{Ignition or no ignition outcomes of tests at different heater angles with respect to wind speed. Markers indicate the outcome of each test and the curves show the logistic regression of each test group. The shaded regions show 95\% confidence intervals for each regression.}
             \label{fig:windSpeed}
         \end{figure}
@@ -127,7 +124,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
     In contrast to the observed sensitivities of wind speed on ignition probability the time to ignition is more sensitive to the heater orientation than the wind speed. Figure~\ref{fig:histogramFigure} shows histograms of the time to ignition (i.e., occurrence of flames) for each test where ignition was observed. The wind speed increases from the top plot to the bottom plot and the color of each group in the plot represents the different heater angles. Note that the time to ignition axis is log-scale. Three observations are noted about the time to flaming ignition. First, the times to ignition for the 3.5\si{\meter\per\second}, and 5.8\si{\meter\per\second} wind speeds often are sufficiently long (i.e., \textgreater 100\si{\second}) enough to suggest that the fuel beds may be igniting in a smoldering mode and then transition to flaming. Second, for the 0.5\si{\meter\per\second} tests the difference in time to ignition between the heater angles are much smaller than for the other two wind speeds. Third, for the 3.5\si{\meter\per\second}, and 5.8\si{\meter\per\second} cases ignition times are typically longest when the heater is oriented parallel to the flow. The shortest times to ignition typically occurred when the heater was perpendicular to the flow. The sensitivity of time to ignition to different heater angles suggests that the ignition process changes as the heater angle changes.
         \begin{figure}[hpbt]
             \centering
-            \includegraphics[width=\columnwidth]{Figures/stacked_speed_hist.png}
+            \includegraphics[width=0.5\columnwidth]{Figures/stacked_speed_hist.png}
             \caption{Histogram of time to flaming ignition for each test group. Wind speed increased from top to bottom with color indicating different heater angles.}
             \label{fig:histogramFigure}
         \end{figure}
@@ -175,7 +172,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
                  \centering
                  \begin{tikzpicture}
                      \node{
-                     \includegraphics[width=0.75\columnwidth]{Figures/parallel_cfd_plot.png}};
+                     \includegraphics[width=0.45\columnwidth]{Figures/parallel_cfd_plot.png}};
                      \draw[-, dotted, very thick, red] (-2.5, 0.05) -- (2.5, 0.05);
                  \end{tikzpicture}
                  \caption{Parallel}
@@ -186,7 +183,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
                  \centering
                  \begin{tikzpicture}
                      \node{
-                     \includegraphics[width=0.75\columnwidth]{Figures/45_cfd_plot.png}};
+                     \includegraphics[width=0.45\columnwidth]{Figures/45_cfd_plot.png}};
                      \draw[-, dotted, very thick, red] (-2.1, 1.9) -- (0.9, -1.2) -- (2.5, -1.2);
                  \end{tikzpicture}
                  \caption{45\si{\degree}}
@@ -197,7 +194,7 @@ Vol.~VOLUME, PAGES, YEAR. \\
                  \centering
                  \begin{tikzpicture}
                      \node{
-                     \includegraphics[width=0.75\columnwidth, trim={10cm 0cm 0cm 0cm}, clip]{Figures/90_cfd_plot.png}};
+                     \includegraphics[width=0.45\columnwidth, trim={10cm 0cm 0cm 0cm}, clip]{Figures/90_cfd_plot.png}};
                     \draw[-, dotted, very thick, red] (-2.5, 0.18) -- (2.5, 0.18);
                  \end{tikzpicture}
                  \caption{Perpendicular}
