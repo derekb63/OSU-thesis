@@ -88,6 +88,8 @@
 \usepackage{nicefrac}
 \usepackage{bm}
 
+\usepackage[intoc=True,]{nomencl}
+
 \usepackage[version=4]{mhchem}
 
 \usepackage[binary-units]{siunitx}
@@ -167,3 +169,16 @@
     #3
     \vfill
 }
+
+
+\makenomenclature
+\newcounter{rowcntr}[table]
+\renewcommand{\therowcntr}{\thetable.\arabic{rowcntr}}
+
+% A new columntype to apply automatic stepping
+\newcolumntype{N}{>{\refstepcounter{rowcntr}\therowcntr}c}
+
+% Reset the rowcntr counter at each new tabular
+\AtBeginEnvironment{tabular}{\setcounter{rowcntr}{0}}
+
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
