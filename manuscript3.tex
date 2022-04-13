@@ -52,6 +52,22 @@
         \end{tabular}
         \label{tab:composition}
     \end{table*}
+        \begin{table*}[hpbt]
+        \caption{Average bulk density of materials for each material and wind speed.}
+        \centering
+        \begin{tabular}{crr}
+            % \rowcolor{gray!50}
+            Material & U\textsubscript{bulk} = 0.1\si{\meter\per\second} (\si{\kilogram\per\cubic\meter})& U\textsubscript{bulk} = 5.8\si{\meter\per\second} (\si{\kilogram\per\cubic\meter})\\
+            \hline
+            Oak Wood         & 344 & 428 \\
+            Douglas-fir Wood & 99  & 74 \\
+            Wheat Straw      & 85  & 85 \\
+            Pine Wood        & 114 & 115 \\
+            Pine Bark        & 215 & 172 \\
+            Douglas-Fir Bark & 131 & 146  
+        \end{tabular}
+        \label{tab:composition}
+    \end{table*}
     Two experimental apparatus were used to conduct ignition experiments. The experimental apparatus used for the tests in quiescent conditions is shown in Figure~\ref{fig:speciesApparatus}. The quiescent apparatus used a lever arm to hold the cartridge heater in a fixed position the duration of the test. The heater was inserted into the fuel bed approximately half of the heater diameter (3\si{\milli\meter}). Tests conducted with a wind speed of \si{\meter\per\second} were performed using the apparatus shown in Figure~\ref{fig:speciesWindTunnel}. This apparatus was operated inside of a wind tunnel where the heater was lowered using an automated lowering device that maintained a constant pressure equivalent to that of a 10\si{\gram} ember landing on the fuel bed. The pressure was monitored and adjusted using a PID control system with force measured by a load cell. For all tests the cartridge heater (firebrand surrogate) used was a 50\si{\milli\meter} long 6.35\si{\milli\meter} diameter cartridge heater.
         \begin{figure}[htpb]
         \centering
@@ -132,8 +148,7 @@
 
     Perhaps unsurprisingly, Douglas-fir bark and pine bark, with the highest lignin content, were not observed to ignite for the conditions tested. This suggests that materials with high lignin contents may be the least likely to ignite when exposed to embers and thus are the safest with respect to flaming ignition risk around homes. This does not, however, account for the potential for smoldering ignition and a subsequent smoldering to flaming transition that may occur. Thermogravametric analysis experiments have shown that while lignin begins to decompose at the lowest temperature of the three primary components, it decomposes at the slowest rate and at a much wider range of temperatures~\cite{Yang2007a}. It was also observed that the peak gas production of \ce{CO}, \ce{CO2}, and \ce{CH4} occurs at a higher temperatures than hemicellulose and cellulose. In contrast to Douglas-fir bark, wheat straw had the lowest estimated lignin concentration but was also not observed to ignite. When comparing wheat straw to Douglas-fir wood the higher lignin concentration suggests that Douglas-fir wood is likely to have a higher ignition temperature than wheat straw. This discrepancy is attributed to two material attributes. First, the pyrolysis process is complex and there is not a clear linear relationship between the composition of the fuel and flaming ignition. It appears that materials of different compositions are capable of producing gaseous products of near equal ignitability but the proportion of each constituent for which ignition to occurs most readily is unclear. Second, the thermal conductivity of the materials likely varies significantly which impacts the temperature gradients and mass of the material above the pyrolysis temperature, further obfuscating the effect of composition on ignition. 
     
-    The 50\% ignition probability results for the 5.8\si{\meter\per\second} wind speed tests are shown in Table~\ref{tab:composition50temp} along with the results for the 0.1\si{\meter\per\second} tests. From these results there are three observations of note. First, the increase of wind lowered the threshold for ignition probability for the Douglas-fir wood and Pine wood by approximately 30\%. Second, in contrast to the Douglas-fir and Pine wood results, an increase in wind resulted in a decrease in a higher threshold for ignition.  Third, the materials that were not observed to ignite in the quiescent tests were also not observed to ignite in the presence of wind. 
-    
+    The 50\% ignition probability results for the 5.8\si{\meter\per\second} wind speed tests are shown in Table~\ref{tab:composition50temp} along with the results for the 0.1\si{\meter\per\second} tests. From these results there are three observations of note. First, the increase of wind lowered the threshold for ignition probability for the Douglas-fir wood and Pine wood by approximately 30\%. Second, in contrast to the Douglas-fir and Pine wood results, an increase in wind resulted in a decrease in a higher threshold for ignition.  Third, the materials that were not observed to ignite in the quiescent tests were also not observed to ignite in the presence of wind. While the trends for douglas-fir wood and pine wood match those presented in Chapter~\ref{part:manuscript2} and trends reported in other studies of pine needle ignition~\cite{Wang2017} and eucalyptus bark~\cite{Ellis2011, Ellis2015}. The decreasing ignition probability of the oak wood contradicts those observed in the aforementioned studies and this study but is not unprecedented. Ignition studies of various litter layers types ignited by various single firebrands observed a sensitivity to ember location where embers that landed on top of a fuel bed in windy conditions were less likely to cause ignition than those embedded where ignition was enhanced~\cite{Plucinski2008}. This trend was attributed to increased heat loss due to wind. In this study, however, the location of the cartridge heater was consistent across all materials, the energy is not a function of the wind speed, and the flow field around the embers is consistent.  
     \begin{table*}[hpbt]
         \caption{Heater temperature required for 50\% probability of ignition for the materials and conditions tested.}
         \centering
@@ -150,6 +165,10 @@
         \end{tabular}
         \label{tab:composition50temp}
     \end{table*}
+    
+    Comparing the ignition trends of oak wood to the non ignition of pine bark and douglas-fir bark it would seem that a potential cause of decreased ignition is correlated to the material properties. Density particle size chemistry
+    
+    
     
     In summary, characterizing the flaming ignition propensity of fuels with respect to chemical composition alone will likely not yield satisfactory results. The inclusion of other material properties, such as thermal conductivity, however, may add enough additional knowledge for comprehensive predictions of ignition to be made. Further investigation of the differences in chemical and thermal properties of the materials is necessary to unravel the interactions between thermal and chemical processes and the resulting impact on flaming ignition before knowledge sufficient for a predictive tool that may be used for fire prevention and management may be created
     \cite{MacLean1941}.
