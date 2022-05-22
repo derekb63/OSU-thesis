@@ -4,7 +4,8 @@
 \renewcommand{\TheAuthors}{Derek Bean, David L. Blunck \\ \\ My contributions to this work included the design of the experiments, fabrication of the experimental apparatus, collecting data, data analysis, conducting modelling efforts, and preparation of the manuscript.}
 
 \renewcommand{\TheAddress}{
-\textbf{Status: In Preparation}
+\textbf{Status: Under Review} \\
+\textit{Fire Safety Journal}
 }
 
 \PaperHeader{\TheTitle}{\TheAuthors}{\TheAddress}
@@ -13,10 +14,11 @@
 \label{part:manuscript2}
 
 \section{Abstract}
+\label{sec:abtract2}
     The increasing severity of wildfires and the expansion of the wildland urban interface has increased the need to better protect homes from fires. Ignition of fuels (e.g., needles, mulch, leaves) near or on homes by firebrands can be a significant risk factor for home loss. Understanding the environmental factors that control the ignition of fuel beds by firebrands is important to reducing the risk of home loss. This study evaluates the effect of the wind speed and direction on the probability of ignition of fuel beds by firebrands. The fuel beds, Douglas-fir particles between 1.3\si{\milli\meter} and 2.3\si{\milli\meter} in size, were ignited by a cartridge heater (i.e., surrogate firebrand). Flaming ignition probability and time to ignition were determined for three different wind speeds and three wind directions. CFD calculations were performed to provide additional insights into the flow field leading up to ignition. Increases in wind speed above quiescent conditions reduced the temperature required for flaming ignition. An increase in wind speed to 3.5\si{\meter\per\second} from quiescent increased the ignition probability of fuel beds from 60\% to roughly 100\% depending on the wind direction. However, a threshold was observed for some wind directions where a further increase of wind did not increase the ignition probability. Temperatures required for flaming ignition and the time to ignition were sensitive to the wind direction. Ignitions occurred at the lowest temperatures when the wind direction was perpendicular to the surrogate firebrand. High speed images of the ignition process and  corresponding CFD calculations indicate that ignition occurred in regions with long residence times. The sensitivity to wind direction is attributed to differences in recirculation zones which changes the residence time of pyrolyzates. 
     
 \section{Introduction} 
-
+\label{sec:introduction2}
     As the severity of wildfires and the number of homes in the wildland urban interface (WUI) increases the need is rising to better protect homes from wildfires~\cite{Marlon2012Long-termUSA, Manzello2013, Barrett2020}. A common way that homes are destroyed during wildfires is by the ignition of fuel beds (e.g., needles, leaves, or landscaping materials) by firebrands. Flames may then spread to and subsequently engulf the structure~\cite{Manzello2014, Maranghides2013NISTIgnitions}. A better understanding of how fuel beds ignite around homes is necessary in order to better protect homes from this phenomena. While the overall mechanisms by which ignition by firebrands occur are generally well understood, predicting when ignition will occur remains elusive~\cite{Fernandez-Pello2017}. One of the reasons for the limitations of predictive capabilities is the lack of quantification with respect to how changes in the fuel bed and environmental conditions influence the likelihood of ignition~\cite{Finney2013}.
     
     Wind is an environmental factor that can have a significant impact on the spread of fires. First, increases in wind speed increase the size of firebrands produced~\cite{Suzuki2013}, potentially leading to firebrands of higher energy content. Second, firebrand laden winds flowing around structures can lead to accumulation of firebrands in particular regions~\cite{Suzuki2020a, Manzello2014}. Third, the amount of heat imparted to a fuel bed by firebrands can increase as wind speeds increase~\cite{Hakes2019a, Tao2020, Salehizadeh2021}. 
@@ -36,7 +38,7 @@
     With this background and motivation, the objective of this study is to quantify how changing environmental factors, specifically wind speed and direction, influences ignition of a fuel bed in contact with a firebrand. It is expected that the results of this work will help further the understanding of the influence of wind on fuel bed ignition and may allow for better protection of structures in the WUI.
 
 \section{Methodology}
-
+\label{sec:methods2}
     The probability of flaming ignition for beds of Douglas-fir particles were measured for three different wind speeds and firebrand orientations in a wind tunnel. Douglas-fir particles serve as a surrogate for natural fuels near the WUI. Figure~\ref{fig:windTunnelApparatus} shows a representation of the wind tunnel, fuel bed, and the portion of the device for lowing a cartridge heater (i.e., surrogate firebrand) onto the fuel bed.  The wind speeds tested were 0.5 \si{\meter\per\second}, 3.5 \si{\meter\per\second}, and 5.8 \si{\meter\per\second}. Higher wind speeds were not tested to avoid material from the fuel bed blowing away. The wind speed was measured with a TSI-IFA300 hot wire probe. Tests were conducted with the heater placed parallel, perpendicular, and 45\si{\degree} relative to the wind direction for each wind speed. 
 
     
@@ -80,6 +82,7 @@
    The second step of the computational effort simulated pyrolysis gas distribution in near the heater using OpenFOAM~\cite{Foundation2020}. The computational domain used is outlined in Figure~\ref{fig:windTunnelApparatus} with a dashed rectangle. The local equivalence ratio was calculated after one second of pyrolysis release. While these times are much less than the average time to ignition, insights are still gained into the distribution of pyrolyzates with respect to the observed ignition locations for the heater orientations.
     
 \section{Results and Discussion}
+\label{sec:results2}
     The ignition or no ignition outcomes of the the tests are shown in Figure~\ref{fig:heaterAngle}. Individual markers in the plots represent the outcome of each test. The curves are logistic regressions for each of the test groups (i.e., tests with the same wind speed and heater angle) with shaded regions around the curves indicating the 95\% confidence interval of the regressions. The tests are grouped such that each plot shows tests of different wind speeds at the same heater orientation. The topmost plot shows results when the heater is parallel to the flow, the middle plot when the heater is 45\si{\degree} to the flow, and the bottom plot when the heater is perpendicular to the flow. 
         \begin{figure}[hpbt]
             \centering
@@ -208,6 +211,7 @@
     The correlation between time to ignition, ignition temperatures, and ignition locations indicates that ignition events are sensitive to the residence time of pyrolyzates in a high temperature zone. In other words, a firebrand is much more likely to ignite a fuel bed if the wind speed and geometry of the firebrand or firebrands promote extended residence times of pyrolyzates in a low velocity recirculation zone near the firebrand.
    
 \section{Summary and Conclusions}
+\label{sec:summary2}
     Flaming ignition tests were conducted for surrogate fuel beds made of Douglas-fir particles.
     Ignition was induced by a cartridge heater, which served as a surrogate firebrand. The heater was maintained at a fixed temperature throughout each test, thus allowing sensitivities of ignition to wind speed and orientation to be further understood. The ignition probability, time to ignition, high speed imagery, and CFD results were used to quantify sensitivities to ignition related to fluid mechanics around the firebrand and fuel bed as controlled by the wind speed and heater angle. The specific conclusions of this work are as follows:
         \begin{enumerate}
