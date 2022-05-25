@@ -51,8 +51,40 @@ The conclusions of each effort are restated in the following sections followed b
 \section{Overall model}
     The overall objective of this work is to identify parameters and processes that control the ignition of a fuel bed when an ember lands on it with an anticipated impact of enabling the creation of a simplified model that may be used quickly determine the likelihood of ignition. To evaluate the effectiveness of this work in meeting those goals a model was created to predict ignition. The model was then applied to results of other studies that utilized different fuel bed materials and ignition sources to determine cross study applicability.
     
+    After the completion of the experimental efforts outlined in the previous chapters the results were aggregated into a single dataset containing the results from the 1086 tests conducted. The parameters included in the model and the corresponding units are as follows:
+        \begin{itemize}
+            \item Wind speed (\si{\meter\per\second)}
+            \item Wind direction relative to longitudinal firebrand axis (\si{\degree})
+            \item Ratio of characteristic lengths between particle size and ember size (-)
+            \item Chemical composition: mass fractions of Cellulose, Hemicellulose, Lignin, Tannins, and Triglycerides (-)
+            \item Fuel bed bulk density (\si{\kilo\gram\per\cubic\meter})
+            \item Fuel bed thermal diffusivity (\si{\square\meter\per\second})
+            \item Average temperature of the firebrand(s) (\si{\celsius})
+            \item Number of firebrands (-)
+            \item Spacing between firebrands as multiple of characteristic length (-)
+        \end{itemize}
+    The aggregated data was then used to create a Random Forest Classifier model using the scikit-learn package in python~\cite{scikit-learn} to estimate ignition outcomes for each test. Using a 0.25/0.75 test train spit on the data the R\textsuperscript{2} validation score for the model with an out of bag score of 0.83. Suggesting that the model accounts can predict the ignition correctly 83\% of the time. While the accuracy of the model is likely acceptable if such a model was to be used as an indicator or predictor of ignition during a fire or to inform preventative measures it would be beneficial to reduce the number of inputs required. An examination of the most important input parameters and refinement of the model found that accuracy was not degraded if number of parameters was reduced to include only the following variables:
+        \begin{itemize}
+            \item Average temperature of the firebrands
+            \item Fuel bed bulk density
+            \item Wind speed
+            \item Ratio of characteristic lengths between particle size and ember size
+            \item Wind direction
+        \end{itemize}
+    Using the five characteristics above the model, a prediction accuracy of 83\% was maintained. While it is beneficial to have an accurate predictive model for a single set of experiments in a similar apparatus, a model capable of predictions across different is far more valuable for preventing home loss. To evaluate the accuracy of the model across studies the model was applied to a selection of studies from literature. The studies and relevant parameters from each study are shown in Table~\ref{tab:otherStudies}. All of the studies presented in Table~\ref{tab:otherStudies} used hot metal particles dropped onto fine fuel beds of processed material. The studies by Hadden et al. and Urban et al. used pure cellulose as the fuel bed and the study by Zak et al used a blend of grasses processed into a powder. A wind direction of 0\si{\degree} was used for all studies since the geometry of the metal particles is anticipated to produce recirculation zones similar to that of a cylindrical heater parallel to the flow. The average temperature was defined as the average of the initial temperature and ambient temperature. More sophisticated estimates of the average temperature based on the average time to ignition and estimated heat losses from the ember were conducted but the accuracy was not improved. Thus, a simpler metric was chosen.  
+        \begin{table}[]
+            \centering
+            \caption{Data inputs for the model from selected studies.}
+            \begin{tabular}{crrrrrc}
+                Authors & $\bar{T}$ (\si{\celsius}) &  $\bar{\rho}_{bed}$ (\si{\kilo\gram\per\cubic\meter})& $U$ (\si{\meter\per\second}) & $L_{p}/L_{e}$ (-)& $\Theta_{wind}$ (\si{\degree}) & Citation\\
+                \hline
+                 Hadden et al. & 260 - 560 & 200 & 0.5 & 0.02 - 0.45 & 0 & \cite{Hadden2011}\\
+                 Urban et al. & 285 - 560 & 282 & 0.5 & 0.06 - 0.25 & 0 & \cite{Urban2018}\\
+                 Zak et al.    & 310 - 560 & 338 & 0.5 & 0.04 - 0.15 & 0 & \cite{Zak2014}
+            \end{tabular}
+            \label{tab:otherStudies}
+        \end{table}
+    The first approach used was to apply reduced model created from only the data generated from studies in this dissertation and predict ignition for each of the studies in literature. The accuracy of the model at predicting ignition for other studies was 50\%, which is entirely unusable for any sort of predictive modelling. However when the model was retrained using the same five parameters but including the Zak et al. data in conjunction with the results of this work the predictive accuracy increased to 96\% for the Hadden et al. study and 81\% for the Urban et al. study. The increase in accuracy suggests that using as few as the five parameters in this model predictions can be made across differences in experimental conditions. Predictions across experimental conditions has been one of the biggest hurdles to creating a general predictive model. The identification of the primary controlling parameters of ignition in this work has created a framework for bridging the predictive gap across various configurations.  
     
-    
-    
-
 \section{Future Work}
+    
