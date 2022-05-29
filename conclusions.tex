@@ -1,6 +1,6 @@
 %!TEX root = thesis.tex
 
-\chapter{Conclusions \& Future Work}
+\chapter{Conclusions \& Ignition Model}
 \label{chap:conclusion}
 The preceding chapters of this document presented findings from studies evaluating the influence of various parameters on the probability of ignition of fuel beds in wild fires. The specific objectives of this work are as follows:
         \begin{enumerate}
@@ -11,7 +11,7 @@ The preceding chapters of this document presented findings from studies evaluati
         \end{enumerate}
 The conclusions of each effort are restated in the following sections followed by a discussion of the implications of the results as they pertain to each specific objective and the overall objective of this work.
 
-\section{Particle Size}
+\section{Sensitivities of Porous Beds and Plates to Ignition by Firebrands}
         \begin{enumerate}
             \item 
                 Smaller particles ignite more readily in porous beds than larger particles when heat transfer from the heater is primarily through conduction. This was evident by higher ignition probabilities, in general, of the smaller particles for a fixed heater temperature. As particle sizes increase radiant heat transfer becomes more important and fuel beds with larger particles were more likely than smaller particles to ignite at extended times (\textgreater 100\si{\second}) due to the increased importance of radiant ignition. 
@@ -23,7 +23,7 @@ The conclusions of each effort are restated in the following sections followed b
                 Consideration of the transport characteristics of pyrolyzate gases near the high temperature source can be important for more fully predicting ignition propensity. A \textit{Da} of ignition, in relation to the measured heat flux and thermal diffusivity of the fuel beds, is a promising relationship for predicting ignition for the porous fuel beds.  
         \end{enumerate}
 
-\section{Wind Speed}
+\section{Influence of Wind on Flaming Ignition of Porous Wood Fuel Beds}
         \begin{enumerate}
             \item
             An increase in wind speed above quiescent conditions reduces the temperature required for the flaming ignition of a fuel bed. For example, an increase in wind speed of 3.5\si{\meter\per\second} from quiescent increases the ignition probability of a fuel bed from under 30\% to roughly 100\%. However, a linear increase in wind speed does not result in a linear increase in ignition probability. Thresholds in wind speed exist above which temperatures required to achieve ignition actually increase. For example, when the wind is oriented 45\si{\degree} from the heater centerline increasing the wind from quiescent to 3.5\si{\meter\per\second} reduces the temperature required for ignition probability by 30\%. However, increasing the wind speed from quiescent to 5.8\si{\meter\per\second} reduces the temperature required for ignition by only 25\%. Presumably these thresholds occur because of reductions in residence time. 
@@ -35,7 +35,7 @@ The conclusions of each effort are restated in the following sections followed b
         \end{enumerate}
     The conclusions of this work show that ignition is favored when a firebrand(s) land on a fuel bed under wind speeds and orientations that promote greater residence times of pyrolyzates near a high temperature region of firebrands. It was observed that increases of wind speed, of a magnitude that may commonly occur during wildfires, can increase the probability of fuel bed ignition from very unlikely to a near certainty regardless of the ember orientation to the wind. This highlights the increased risk of spot fires due to ignition of fuel beds that accompanies wind in a wildfire. 
 
-\section{Species}
+\section{Effect of Fuel Bed Composition on Flaming Ignition Probability}
         \begin{enumerate}
             \item Of the six materials tested, only three were able to be ignited within below the 750\si{\celsius} maximum temperature of the firebrand surrogate. Two of the three materials for which ignition was not observed were bark. The higher ignition threshold of the bark materials is attributed to higher lignin concentrations. The resistance to ignition present in these materials suggest that using materials high in lignin in locations at risk for firebrand attack in wildfires may reduce ignitions and subsequent losses of structures.
             
@@ -45,7 +45,7 @@ The conclusions of each effort are restated in the following sections followed b
         \end{enumerate}
     The conclusions of this work show that ignition is sensitive to the chemical composition of fuel beds in both quiescent conditions and under wind. An increase in wind was observed to increase ignition probability for some materials; however, this was not universally the case. Materials high in lignin were among the least likely to ignite and more suitable for placement in areas where firebrands are likely to land or accumulate in a WUI environment. Further and more targeted analysis of the differences in pyrolysis products for each material will likely yield further insight. 
 
-\section{Ember Interactions}
+\section{Influence of Multiple Firebrands on the Ignition of Fuel Beds}
         \begin{enumerate}
             \item An increase of wind speed from 0.5\si{\meter\per\second} to 5.8\si{\meter\per\second} reduced the temperature required for ignition for all heater configurations. The decrease in ignition temperature required ranged from 20\% to 60\% depending on the heater configuration. 
             
@@ -56,7 +56,7 @@ The conclusions of each effort are restated in the following sections followed b
         \end{enumerate}
     The conclusions of this work show that ignition of a fuel bed is more likely when a firebrand or firebrand lands on a fuel bed under conditions that promote recirculation zones near locations where pyrolysis gases are released from the fuel bed. It was observed that under windy conditions ignition is less sensitive to nearby embers or inert objects than at low wind speeds. These observed sensitivities highlight the increased risk of fuel bed ignition in windy conditions and in cases where firebrands may accumulate in all wind conditions. 
 
-\section{Overall model}
+\section{Ignition Model}
     The overall objective of this work is to identify parameters and processes that control the ignition of a fuel bed when an ember lands on it with an anticipated impact of enabling the creation of a simplified model that may be used to determine the likelihood of ignition quickly. A model was created to predict ignition to evaluate the effectiveness of this work in meeting those goals. The model was then applied to the results of other studies that utilized different fuel bed materials and ignition sources to determine cross-study applicability.
     
     After the completion of the experimental efforts outlined in the previous chapters the results were aggregated into a single dataset containing the results from the 1086 tests conducted. The parameters included in the model and the corresponding units are as follows:
@@ -93,15 +93,3 @@ The conclusions of each effort are restated in the following sections followed b
             \label{tab:otherStudies}
         \end{table}
     The first approach used was to apply a reduced model created from only the data generated from studies in this dissertation and predict ignition for each of the studies in the literature. The accuracy of the model at predicting ignition for other studies was 50\%, which is entirely unusable for any type of predictive modeling. However, when the model was retrained using the same five parameters but including the Zak et al. data in conjunction with the results of this work, the predictive accuracy increased to 96\% for the Hadden et al. study and 81\% for the Urban et al. study. The increase in accuracy suggests that predictions can be made across differences in experimental conditions using as few as five parameters. Predictions across experimental conditions have been one of the biggest hurdles to creating a general predictive model. Identifying the primary controlling parameters of ignition in this work has created a framework for bridging the predictive gap across various configurations.  
-    
-\section{Future Work}
-  The results in this work have identified controlling parameters for ignition and provided a framework for creating models with capabilities to predict various ignition scenarios. Significant additional work is needed to refine the proposed framework and explore different ignition parameters. 
-        \begin{itemize}
-            \item The moisture content of the fuel bed was not considered in this work but is a well-studied parameter that significantly affects ignition. Extension of the experiments is necessary to determine how moisture content fits into the proposed framework. The change in fuel bed bulk density due to moisture may sufficiently characterize the difference, but that remains to be seen.
-            
-            \item Additional tests with well-characterized smoldering or flaming embers would significantly enhance the knowledge gained in this work. Typical temperatures of physically combusting firebrands are higher than those capable by the apparatus used in this work~\cite{Fateev2017a}. The higher temperatures may influence the ignition propensity. However, combusting embers are susceptible to heat losses and environmental factors where the firebrand surrogates used in this work are mainly independent of these factors. It is unclear how or if the addition of energy sources that react with the environment will shift the parameters identified to be most influential to ignition. A series of highly instrumented and controlled experiments focused on the coupled interactions between a reacting ember, a reacting fuel bed, and changing environmental conditions. I applaud the patience and perseverance of those who may undertake this endeavor in the future. 
-            
-            \item Relatively limited data is available regarding the thermal properties of porous biomass media. The lack of available information is likely due to the significant variation in solid biomass material properties and the endless configurations (e.g., porosity and particle orientation) in the natural environment. A series of targeted studies determining the thermal properties of common fuel bed materials would likely increase the understanding of how ignition changes between different materials or even similar materials under various packing conditions.
-            
-            \item In addition to the limited data available for thermal properties of fuel bed materials, characterization of the chemical composition of materials and the influence of chemical changes on the pyrolysis and subsequent ignition would provide valuable insight into the differences in ignition between materials and environmental conditions. 
-        \end{itemize}
