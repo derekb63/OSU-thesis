@@ -38,6 +38,7 @@
 
 \section{Methodology}
 \label{sec:methods2}
+    \subsection{Experimental}
     The probability of flaming ignition for beds of Douglas-fir particles were measured for three different wind speeds and firebrand orientations in a wind tunnel. Douglas-fir particles serve as a surrogate for natural fuels near the WUI. Figure~\ref{fig:windTunnelApparatus} shows a representation of the wind tunnel, fuel bed, and the portion of the device for lowing a cartridge heater (i.e., surrogate firebrand) onto the fuel bed.  The wind speeds tested were 0.5 \si{\meter\per\second}, 3.5 \si{\meter\per\second}, and 5.8 \si{\meter\per\second}. Higher wind speeds were not tested to avoid material from the fuel bed blowing away. The wind speed was measured with a TSI-IFA300 hot wire probe. Tests were conducted with the heater placed parallel, perpendicular, and 45\si{\degree} relative to the wind direction for each wind speed. 
 
     
@@ -76,9 +77,86 @@
     
     High speed images of the ignition process were captured using a Phantom VEO 710 camera for select conditions. The images were used to provide insights into differences between ignition processes. Images were collected at 5\si{\kilo\hertz}. 
     
-    A simplified computational model was implemented to provide further insights into the processes leading up to ignition for the different configurations. Fluid flow around the heater, heat transfer from the heater to the fluid, and the release of pyrolysis gases into the fluid domain were simulated for the 5.8\si{\meter\per\second} wind speed and the three heater orientations. Simulations were conducted in two parts. First the average mass flux and average thermal properties of pyrolyzates were estimated. These estimations were conducted through a non-reacting heat transfer model to the fuel bed to obtain an estimate for the mass of fuel bed material above the pyrolysis temperature of 220\si{\celsius}. The thermal properties of the fuel bed were estimated using correlations for porous media~\cite{bergman2011fundamentals} and the average bulk density of the fuel beds during the tests. The heat transfer to the fuel bed was determined from the energy balance for a heater temperature corresponding to the 50\% ignition probability. The mass of pyrolysis gases released was then estimated using 0D calculations in Cantera. The chemical composition of the fuel bed was estimated from the Bioengineering Feedstock Library database~\cite{feedstock}. The BioPox mechanism~\cite{Dhahak2019} was used for pyrolysis kinetics in the fuel bed. Species were considered to be released into the flow domain if they existed in the gas phase biomass mechanism Bio1412~\cite{Ranzi2008}. More detail for the species selection process is available in previous work~\cite{Bean2021}.
+    \subsection{Computational}
     
-   The second step of the computational effort simulated pyrolysis gas distribution in near the heater using OpenFOAM~\cite{Foundation2020}. The computational domain used is outlined in Figure~\ref{fig:windTunnelApparatus} with a dashed rectangle. The local equivalence ratio was calculated after one second of pyrolysis release. While these times are much less than the average time to ignition, insights are still gained into the distribution of pyrolyzates with respect to the observed ignition locations for the heater orientations.
+    A simplified computational model was implemented to provide further insights into the processes leading up to ignition for the different configurations. Fluid flow around the heater, heat transfer from the heater to the fluid, and the release of pyrolysis gases into the fluid domain were simulated for the 5.8\si{\meter\per\second} wind speed and the three heater orientations. Simulations were conducted in two parts. First the average mass flux and average thermal properties of pyrolyzates were estimated. These estimations were conducted through a non-reacting heat transfer model to the fuel bed to obtain an estimate for the mass of fuel bed material above the pyrolysis temperature of 220\si{\celsius}. The thermal properties of the fuel bed were estimated using correlations for porous media~\cite{bergman2011fundamentals} and the average bulk density of the fuel beds during the tests. The heat transfer to the fuel bed was determined from the energy balance for a heater temperature corresponding to the 50\% ignition probability. 
+    
+     The temperature evolution of the fuel bed over time was used to estimate the pyrolysis products. The calculations solved the heat diffusion equation (Equation~\ref{eqn:heatDiffusion} to observe the spatial and temporal evolution of the fuel bed temperatures. Calculations were conducted for 10 seconds for two reasons. First, the assumptions, that are outlined in the following section, reduce the accuracy of the model due to pyrolysis of the fuel bed in the experiment changing the fuel bed properties. Second, in absence of changes in fuel beds due to pyrolysis a simulation time of ten seconds provided sufficient insight into trends observed in the experiments. 
+        \begin{equation}
+            \frac{\partial \left(\rho h \right)}{\partial t} = \frac{\partial}{\partial x_{j}} \left( \alpha \frac{\partial h}{\partial x_{j}} \right)
+            \label{eqn:heatDiffusion}
+        \end{equation}
+     The assumptions for the temperature modeling of the fuel bed are as follows:
+        \begin{itemize}
+            \item Fuel beds were considered to be non reacting. 
+            \item Thermal properties of the fuel bed were considered independent of temperature.
+            \item The temperature evolution of the fuel bed is symmetric around the centerline of the heater.
+            \item The heat losses to the ambient are significantly less than the heat transfer from the heater. Thus, the interface between the fuel bed and air was considered insulated.
+            \item The fuel bed was modeled as a solid with the thermal and physical properties either measured or derived from experimental measurements.
+        \end{itemize}
+
+    
+    The mass of pyrolysis gases released was then estimated using 0D calculations in Cantera. The chemical composition of the fuel bed was estimated from the Bioengineering Feedstock Library database~\cite{feedstock}. The BioPox mechanism~\cite{Dhahak2019} was used for pyrolysis kinetics in the fuel bed. Species were considered to be released into the flow domain if they existed in the gas phase biomass mechanism Bio1412~\cite{Ranzi2008}. More detail for the species selection process is available in previous work~\cite{Bean2021}. The Cantera calculations considered the fuel bed material as an insulated fixed mass reactor. The following equations were solved to obtain the temperature and species concentrations of the pyrolyis products. 
+        \begin{equation}
+            \pder[m]{t} = 0
+        \end{equation}
+        
+        \begin{equation}
+            m \pder[\left( m Y_k \right)]{t} = \dot{m}_{k, gen} = V \dot{\omega}_k MW_k
+        \end{equation}
+        \begin{equation}
+            mc_{v} \pder[T]{t} = \dot{Q} - \sum_{k} \dot{m}_{k,gen}u_k
+        \end{equation}
+    Where $Y_k$, $\dot{m}_{k}$, and  $\dot{\omega}_k$ are the mass fraction, mass generation rate, and generation rate of each species $k$ in the mechanism used. $V$ is the volume of the fuel bed material in the reactor. The species generation rates $ \dot{\omega}_k$ are determined from the reactions included in the mechanism. The mechanism used for pyrolysis contains four different types of chemical reactions. The equations used to calculate the reaction rates for an elementary reaction is:
+        \begin{align}
+            k_f &= AT^{b}e^{-E_a/RT}\\
+            R_{f} &= [A][B]k_f 
+        \end{align}
+    Where $R_f$ is the forward reaction rate, $k_f$ the reaction rate constant, $E_a$ the activation energy, $b$ is the temperature exponent and $R$ is the gas constant. Similarly, the reaction rates for three body reactions are calculated as:
+        \begin{align}
+            R_f &= [A][B][M]k_f \\
+            [M] &= \sum_{k}\epsilon_k C_k
+        \end{align}
+    Where $\epsilon_k$ and $C_k$ are the collision efficiency and concentration of each species, respectively. Fallof reaction rates are calculated using the reduced pressure $P$ defined as:
+        \begin{equation}
+            P = \frac{k_0[M]}{k_\infty}
+        \end{equation}
+    The reaction reaction rate is then calculated as:
+        \begin{equation}
+            k_f (T, P) = k_{\infty} \left( \frac{P}{1+P}\right) F(T,P)
+        \end{equation}
+      Pressure dependent P-Log reaction rates are calculated for intermediate values using a logarithmic interpolation between two reaction rates $k_1$ and $k_2$ at pressures $P_1$ and $P_2$ as:
+        \begin{equation}
+            \log k_f(T,P) = \log k_1(T) + (\log k_2(T) - \log k_1(T))\frac{\log P - \log P_1}{\log P_2 - \log P_1}
+        \end{equation}
+    The overall generation rate of each species ($\dot{\omega}_k$) is then defined as the sum of the individual reaction rates $R_f$ for all of the reactions where the species is present. 
+        \begin{equation}
+            \dot{\omega}_k = \sum_i^N \nu_i R_{f, i}
+        \end{equation}
+    Where $\nu_i$ number of each species produced for each reaction.
+    
+   The second step of the computational effort simulated pyrolysis gas distribution in near the heater using OpenFOAM~\cite{Foundation2020}. The mass, momentum, species, and energy equations for the OpenFOAM calculations are shown below.
+            \begin{equation}
+                \pder[p]{t} + \pder [\rho u_{j}] {x_{j}} = 0
+            \end{equation}
+            
+            \begin{equation}
+                \pder[\left( \rho Y_{k} \right)]{t}  + \pder[\left( \rho u_{j} Y_{k}\right)]{x_{j}}  = 
+                \pder[\mu_{eff}]{x_{j}}  \pder[Y_{k}]{x_{j}} 
+            \end{equation}
+            
+            \begin{equation}
+                \pder[\left(\rho u_{i}\right)]{t}  + \pder[\left( \rho u_{rj}u_{i}\right)]{x_{j}}  + \rho \epsilon_{ijk}\omega_{i}u_{j}= - 
+                \pder[p_{rgh}]{x_{i}}  - \pder[\left( \rho g_i x_j \right)] {x_i}  + \pder{x_j} \left( \tau_{ij} + \tau_{t_{ij}} \right)
+            \end{equation}
+            
+            \begin{multline}
+                \pder[\left(\rho h \right)]{t} + \pder[\left( \rho u_j h \right)]{x_j} + \pder[\left(  \rho k \right)]{t} + \pder[\left( \rho u_j k\right)]{x_j} = \\ -
+                \pder[\left( q_i + q_{ti} \right)]{x_i} + \rho r + q_{rad} + \pder[p]{t} - \rho g_j u_j + \pder[\left( \tau_{ij} u_i \right)]{x_j}
+            \end{multline}
+      The computational domain used is outlined in Figure~\ref{fig:windTunnelApparatus} with a dashed rectangle. A subset of the wind tunnel test section near the heater(s) was considered for the simulation of the flow over the heater(s). For all three heater angles a constant cross section normal to the flow was used. The dimensions of the plane normal to the flow was 110\si{\milli\meter} wide and 48\si{\milli\meter} tall. The lengths of the domains varied to maintain a domain size of 5D upstream and 14D downstream of the heater. The domain lengths were 170\si{\milli\meter} for the 45\si{\degree} and parallel configurations and 120\si{\milli\meter} for the heater perpendicular to the flow. The number of cells for each domain were 420728, 424308, and 307252 for the parallel, 45\si{\degree}, and perpendicular cases. Cell sizes ranged from 0.1\si{\milli\meter} near the heater to 4\si{\milli\meter} in the bulk flow region in the center of the domain. 
+      
+      The inlet boundary conditions were determined from experimental measurements where the bulk wind speed was 5.8 \si{\meter\per\second} and the inlet turbulence intensity was 0.14\%. The solid surfaces (i.e., cartridge heater, holding rods, fuel bed, and wind tunnel floor) were considered with a no-slip boundary condition and at fixed temperatures. All temperatures except the heater surfaces and pyrolyzate injection were 300\si{\kelvin}. The cartridge heater was maintained at a fixed uniform temperature corresponding to the temperature estimated to result in 50\% ignition probability from experimental tests. The inlet temperature and mass flux of the pyrolysis gases were determined from the fuel bed thermal model and Cantera calculations.  The outlet and sides of the domain used a zero gradient boundary condition. The local equivalence ratio was calculated after one second of pyrolysis release. While these times are much less than the average time to ignition, insights are still gained into the distribution of pyrolyzates with respect to the observed ignition locations for the heater orientations. 
     
 \section{Results and Discussion}
 \label{sec:results2}
