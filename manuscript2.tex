@@ -81,7 +81,7 @@
     
     A simplified computational model was implemented to provide further insights into the processes leading up to ignition for the different configurations. Fluid flow around the heater, heat transfer from the heater to the fluid, and the release of pyrolysis gases into the fluid domain were simulated for the 5.8\si{\meter\per\second} wind speed and the three heater orientations. Simulations were conducted in two parts. First the average mass flux and average thermal properties of pyrolyzates were estimated. These estimations were conducted through a non-reacting heat transfer model to the fuel bed to obtain an estimate for the mass of fuel bed material above the pyrolysis temperature of 220\si{\celsius}. The thermal properties of the fuel bed were estimated using correlations for porous media~\cite{bergman2011fundamentals} and the average bulk density of the fuel beds during the tests. The heat transfer to the fuel bed was determined from the energy balance for a heater temperature corresponding to the 50\% ignition probability. 
     
-     The temperature evolution of the fuel bed over time was used to estimate the pyrolysis products. The calculations solved the heat diffusion equation (Equation~\ref{eqn:heatDiffusion} to observe the spatial and temporal evolution of the fuel bed temperatures. Calculations were conducted for 10 seconds for two reasons. First, the assumptions, that are outlined in the following section, reduce the accuracy of the model due to pyrolysis of the fuel bed in the experiment changing the fuel bed properties. Second, in absence of changes in fuel beds due to pyrolysis a simulation time of ten seconds provided sufficient insight into trends observed in the experiments. 
+    The temperature evolution of the fuel bed over time was used to estimate the mass of the fuel bed material undergoing pyrolysis. The calculations solved the heat diffusion equation (Equation~\ref{eqn:heatDiffusion}) to observe the spatial and temporal evolution of the fuel bed temperatures. Calculations were conducted for 10 seconds for two reasons. First, the assumptions, that are outlined in the following section, reduce the accuracy of the model due to pyrolysis of the fuel bed in the experiment changing the fuel bed properties. Second, in absence of changes in fuel beds due to pyrolysis a simulation time of ten seconds provided sufficient insight into trends observed in the experiments. 
         \begin{equation}
             \frac{\partial \left(\rho h \right)}{\partial t} = \frac{\partial}{\partial x_{j}} \left( \alpha \frac{\partial h}{\partial x_{j}} \right)
             \label{eqn:heatDiffusion}
@@ -92,7 +92,7 @@
             \item Thermal properties of the fuel bed were considered independent of temperature.
             \item The temperature evolution of the fuel bed is symmetric around the centerline of the heater.
             \item The heat losses to the ambient are significantly less than the heat transfer from the heater. Thus, the interface between the fuel bed and air was considered insulated.
-            \item The fuel bed was modeled as a solid with the thermal and physical properties either measured or derived from experimental measurements.
+            \item The fuel bed was modeled as a solid with the thermal and physical properties either measured or derived from measurements.
         \end{itemize}
 
     
@@ -103,6 +103,7 @@
         
         \begin{equation}
             m \pder[\left( m Y_k \right)]{t} = \dot{m}_{k, gen} = V \dot{\omega}_k MW_k
+            \label{eqn:speciesMass}
         \end{equation}
         \begin{equation}
             mc_{v} \pder[T]{t} = \dot{Q} - \sum_{k} \dot{m}_{k,gen}u_k
@@ -117,7 +118,7 @@
             R_f &= [A][B][M]k_f \\
             [M] &= \sum_{k}\epsilon_k C_k
         \end{align}
-    Where $\epsilon_k$ and $C_k$ are the collision efficiency and concentration of each species, respectively. Fallof reaction rates are calculated using the reduced pressure $P$ defined as:
+    Where $\epsilon_k$ and $C_k$ are the collision efficiency and concentration of each species, respectively. Falloff reaction rates are calculated using the reduced pressure $P$ defined as:
         \begin{equation}
             P = \frac{k_0[M]}{k_\infty}
         \end{equation}
@@ -129,13 +130,14 @@
         \begin{equation}
             \log k_f(T,P) = \log k_1(T) + (\log k_2(T) - \log k_1(T))\frac{\log P - \log P_1}{\log P_2 - \log P_1}
         \end{equation}
-    The overall generation rate of each species ($\dot{\omega}_k$) is then defined as the sum of the individual reaction rates $R_f$ for all of the reactions where the species is present. 
+  The overall generation rate of each species ($\dot{\omega}_k$) is defined as the sum of the individual reaction rates $R_f$ for all of the reactions where the species is present. Where $\nu_i$ number of each species produced for each reaction. Equation~\ref{eqn:speciesGeneration} results in the source term for Equation~\ref{eqn:speciesMass}, the solution of which determines the mass fractions of the species that are released into the fluid domain above the fuel bed.
         \begin{equation}
             \dot{\omega}_k = \sum_i^N \nu_i R_{f, i}
+            \label{eqn:speciesGeneration}
         \end{equation}
-    Where $\nu_i$ number of each species produced for each reaction.
     
-   The second step of the computational effort simulated pyrolysis gas distribution in near the heater using OpenFOAM~\cite{Foundation2020}. The mass, momentum, species, and energy equations for the OpenFOAM calculations are shown below.
+    
+   The second step of the computational effort simulated pyrolysis gas distribution in near the heater using the 3D LES solver FireFOAM implemented in OpenFOAM~\cite{Foundation2020}. The mass, momentum, species, and energy equations for the FireFOAM calculations are shown below.
             \begin{equation}
                 \pder[p]{t} + \pder [\rho u_{j}] {x_{j}} = 0
             \end{equation}
@@ -154,9 +156,9 @@
                 \pder[\left(\rho h \right)]{t} + \pder[\left( \rho u_j h \right)]{x_j} + \pder[\left(  \rho k \right)]{t} + \pder[\left( \rho u_j k\right)]{x_j} = \\ -
                 \pder[\left( q_i + q_{ti} \right)]{x_i} + \rho r + q_{rad} + \pder[p]{t} - \rho g_j u_j + \pder[\left( \tau_{ij} u_i \right)]{x_j}
             \end{multline}
-      The computational domain used is outlined in Figure~\ref{fig:windTunnelApparatus} with a dashed rectangle. A subset of the wind tunnel test section near the heater(s) was considered for the simulation of the flow over the heater(s). For all three heater angles a constant cross section normal to the flow was used. The dimensions of the plane normal to the flow was 110\si{\milli\meter} wide and 48\si{\milli\meter} tall. The lengths of the domains varied to maintain a domain size of 5D upstream and 14D downstream of the heater. The domain lengths were 170\si{\milli\meter} for the 45\si{\degree} and parallel configurations and 120\si{\milli\meter} for the heater perpendicular to the flow. The number of cells for each domain were 420728, 424308, and 307252 for the parallel, 45\si{\degree}, and perpendicular cases. Cell sizes ranged from 0.1\si{\milli\meter} near the heater to 4\si{\milli\meter} in the bulk flow region in the center of the domain. 
+      The computational domain used is outlined in Figure~\ref{fig:windTunnelApparatus} with a dashed rectangle. A subset of the wind tunnel test section near the heater(s) was considered for the simulation of the flow over the heater(s). For all three heater angles a constant cross section normal to the flow was used. The dimensions of the plane normal to the flow was 110\si{\milli\meter} wide and 48\si{\milli\meter} high. The lengths of the domains varied to maintain a domain size of 5D upstream and 14D downstream of the heater. The domain lengths were 170\si{\milli\meter} for the 45\si{\degree} and parallel configurations and 120\si{\milli\meter} for the heater perpendicular to the flow. The number of cells for each domain were 420728, 424308, and 307252 for the parallel, 45\si{\degree}, and perpendicular cases. Cell sizes ranged from 0.1\si{\milli\meter} near the heater to 4\si{\milli\meter} in the bulk flow region in the center of the domain. For validation the separation angle of the flow was compared to a correlation from literature~\cite{Jiang2020SeparationRegime} and was found to predict the angle within 1\% of the recommended correlation. Reducing the cell size by a factor of two did not appreciably reduce the error and resulted in a significant increase in computational time. Thus, the calculations were considered of acceptable accuracy to visualize the trends observed in experiments.
       
-      The inlet boundary conditions were determined from experimental measurements where the bulk wind speed was 5.8 \si{\meter\per\second} and the inlet turbulence intensity was 0.14\%. The solid surfaces (i.e., cartridge heater, holding rods, fuel bed, and wind tunnel floor) were considered with a no-slip boundary condition and at fixed temperatures. All temperatures except the heater surfaces and pyrolyzate injection were 300\si{\kelvin}. The cartridge heater was maintained at a fixed uniform temperature corresponding to the temperature estimated to result in 50\% ignition probability from experimental tests. The inlet temperature and mass flux of the pyrolysis gases were determined from the fuel bed thermal model and Cantera calculations.  The outlet and sides of the domain used a zero gradient boundary condition. The local equivalence ratio was calculated after one second of pyrolysis release. While these times are much less than the average time to ignition, insights are still gained into the distribution of pyrolyzates with respect to the observed ignition locations for the heater orientations. For validation the separation angle of the flow was compared to a correlation from literature~\cite{Jiang2020SeparationRegime} and was found to predict the angle within 1\% of the recommended correlation. Further grid refinement did not appreciably reduce the error and resulted in a significant increase in computational time. Thus, the calculations were considered of acceptable accuracy to visualize the trends observed in experiments.
+      The inlet boundary conditions were determined from experimental measurements where the bulk wind speed was 5.8 \si{\meter\per\second} and the inlet turbulence intensity was 0.14\%. The solid surfaces (i.e., cartridge heater, holding rods, fuel bed, and wind tunnel floor) were considered with a no-slip boundary condition and at fixed temperatures. All temperatures except the heater surfaces and pyrolyzate injection were 300\si{\kelvin}. The cartridge heater was maintained at a fixed uniform temperature corresponding to the temperature estimated to result in 50\% ignition probability from experimental tests. The inlet temperature and mass flux of the pyrolysis gases were determined from the fuel bed thermal model and Cantera calculations.  The outlet and sides of the domain used a zero gradient boundary condition. The local equivalence ratio was calculated after one second of pyrolysis release. While one second is shorter than average time to ignition, insights are still gained into the distribution of pyrolyzates with respect to the observed ignition locations for the heater orientations. 
     
 \section{Results and Discussion}
 \label{sec:results2}
